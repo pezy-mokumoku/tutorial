@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>System Overview &mdash; Sakura User Guide  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Sakura User Guide  documentation" href="#"/>
+    <link href="_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Sakura User Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">System Overview</a><ul>
+<li><a class="reference internal" href="#compute-nodes">Compute Nodes</a></li>
+<li><a class="reference internal" href="#file-systems">File Systems</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connecting">Connecting</a><ul>
+<li><a class="reference internal" href="#connect-with-ssh">Connect with SSH</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#compiling">Compiling</a></li>
+<li><a class="reference internal" href="#running-jobs">Running Jobs</a><ul>
+<li><a class="reference internal" href="#single-node-job">Single Node Job</a><ul>
+<li><a class="reference internal" href="#partition">Partition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mpi-job">MPI Job</a><ul>
+<li><a class="reference internal" href="#mpi-with-slurm">MPI with Slurm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring-jobs">Monitoring Jobs</a></li>
+<li><a class="reference internal" href="#canceling-jobs">Canceling Jobs</a></li>
+<li><a class="reference internal" href="#more-information-about-slurm">More Information about slurm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">Sakura User Guide</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>System Overview</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="system-overview">
+<h1>System Overview<a class="headerlink" href="#system-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="compute-nodes">
+<h2>Compute Nodes<a class="headerlink" href="#compute-nodes" title="Permalink to this headline">¶</a></h2>
+<p>There are 8 Nodes in Sakura System.
+Each nodes have following specifications:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>CPU</td>
+<td>Xeon D-1571 16 Cores &#64;1.30GHz</td>
+</tr>
+<tr class="row-even"><td>Memory</td>
+<td>32GB</td>
+</tr>
+<tr class="row-odd"><td>Accelerators</td>
+<td>PEZY-SC2, 700MHz, 64GB</td>
+</tr>
+<tr class="row-even"><td>Inteconnect</td>
+<td>Infiniband EDR</td>
+</tr>
+<tr class="row-odd"><td>Storage</td>
+<td>nfs /home</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="file-systems">
+<h2>File Systems<a class="headerlink" href="#file-systems" title="Permalink to this headline">¶</a></h2>
+<p>There is 1 storage mounted /home is shared with other uses.
+/home has 100GB and is shared with other users.
+Threre are no quotes. Please use gentlemanly.</p>
+</div>
+</div>
+<div class="section" id="connecting">
+<h1>Connecting<a class="headerlink" href="#connecting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="connect-with-ssh">
+<h2>Connect with SSH<a class="headerlink" href="#connect-with-ssh" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="25%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>System Name</td>
+<td>Hostname</td>
+<td>RSA Key Fingerprints</td>
+</tr>
+<tr class="row-even"><td>Sakura</td>
+<td>matsu.exascaler.co.jp</td>
+<td>SHA256:gywcL7XDCOgXm4UXV4m0hi2Xzo2I4XLUD2CDnqeDPlA</td>
+</tr>
+</tbody>
+</table>
+<p>For example, to connect to Sakura login node from a UNIX-based system, use the following command::</p>
+<div class="highlight-python"><div class="highlight"><pre>[your machine] $ ssh-add                               # Add ssh key to auth agent
+[your machine] $ ssh -A userid@matsu.exascaler.co.jp   # You have to use SSH Agent forward
+</pre></div>
+</div>
+<p>Then you can login to login node.
+To connect to Sakura Head Node from Sakura login node, use the following command::</p>
+<div class="highlight-python"><div class="highlight"><pre>[ssh] $ ssh esfe
+</pre></div>
+</div>
+<p>First login, you should change your password.
+You have to use <cite>yppasswd</cite> command instead of <cite>passwd</cite> command.:</p>
+<div class="highlight-python"><div class="highlight"><pre>[esfe] $ yppasswd
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compiling">
+<h1>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h1>
+<p>..(snip)..</p>
+</div>
+<div class="section" id="running-jobs">
+<h1>Running Jobs<a class="headerlink" href="#running-jobs" title="Permalink to this headline">¶</a></h1>
+<p>We use slurm for scheduling of clients jobs.
+Please use <code class="code docutils literal"><span class="pre">--exclusive</span></code> option to grab entire of a node.</p>
+<div class="section" id="single-node-job">
+<h2>Single Node Job<a class="headerlink" href="#single-node-job" title="Permalink to this headline">¶</a></h2>
+<p>Sample Job File:</p>
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/bash
+#SBATCH -p debug  # partition name
+#SBATCH -N 1      # number of nodes
+#SBATCH -n 1      # number of process
+#SBATCH --exclusive
+
+./myprogram
+</pre></div>
+</div>
+<p>To submit job, use the sbatch command::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sbatch job.sh
+</pre></div>
+</div>
+<div class="section" id="partition">
+<h3>Partition<a class="headerlink" href="#partition" title="Permalink to this headline">¶</a></h3>
+<p>There are some partition(s) in system.
+To see partition information, use the sinfo command::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sinfo
+</pre></div>
+</div>
+<p>You could choose partition name in job script.</p>
+</div>
+</div>
+<div class="section" id="mpi-job">
+<h2>MPI Job<a class="headerlink" href="#mpi-job" title="Permalink to this headline">¶</a></h2>
+<p>You can use openMPI. mpivars.sh location is following.</p>
+<ul>
+<li><p class="first">openmpi:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ source /usr/mpi/gcc/openmpi-1.8.4/bin/mpivars.sh
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="mpi-with-slurm">
+<h3>MPI with Slurm<a class="headerlink" href="#mpi-with-slurm" title="Permalink to this headline">¶</a></h3>
+<p>Sample Job File:</p>
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/bash
+#SBATCH -p debug
+#SBATCH -N 1 # number of nodes
+#SBATCH -n 4 # number of process
+#SBATCH --ntasks-per-node=4
+#SBATCH --exclusive
+
+source /usr/mpi/gcc/openmpi-1.8.4/bin/mpivars.sh
+
+mpirun ./myprogram
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="monitoring-jobs">
+<h2>Monitoring Jobs<a class="headerlink" href="#monitoring-jobs" title="Permalink to this headline">¶</a></h2>
+<p>To monitor your job, use the squeue command::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ squeue
+</pre></div>
+</div>
+</div>
+<div class="section" id="canceling-jobs">
+<h2>Canceling Jobs<a class="headerlink" href="#canceling-jobs" title="Permalink to this headline">¶</a></h2>
+<p>To cancel your job, use the scancel command::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ scancel [jobid]
+</pre></div>
+</div>
+</div>
+<div class="section" id="more-information-about-slurm">
+<h2>More Information about slurm<a class="headerlink" href="#more-information-about-slurm" title="Permalink to this headline">¶</a></h2>
+<p>See Slurm offical man pages for more information about sbatch, srun, squeue and scancel.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://slurm.schedmd.com/sbatch.html">https://slurm.schedmd.com/sbatch.html</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="debugging">
+<h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
+<p>You can use interactive session with following::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ srun -N 1 --exclusive --pty bash
+</pre></div>
+</div>
+<p>If you want to use 2 nodes::</p>
+<div class="highlight-python"><div class="highlight"><pre>$ srun -N 2 --exclusive --pty bash
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, ExaScaler Inc...
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

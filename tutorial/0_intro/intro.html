@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Tutorial for PEZY systems  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Tutorial for PEZY systems  documentation" href="../index.html"/>
+        <link rel="up" title="Introduction" href="index.html"/>
+        <link rel="next" title="Programming model (PZCL)" href="pzcl_overview.html"/>
+        <link rel="prev" title="Introduction" href="index.html"/>
+    <link href="../_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Tutorial for PEZY systems
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Introduction</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features-of-pezy-sc">Features of PEZY-SC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features-of-pezy-sc2">Features of PEZY-SC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pzcl_overview.html">Programming model (PZCL)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../1_start/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_pezy_scx/index.html">PEZY-SCx Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_libraries/index.html">Tools &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_QA/index.html">Q &amp; A</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Tutorial for PEZY systems</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Introduction</a> &raquo;</li>
+      
+    <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Welcome! This document is PEZY-SCx series programming tutorial!</p>
+<p>This document explains PEZY-SCx series specifications and programming model using the explanation of sample code.</p>
+<p>PZCL is based on OpenCL 1.2 <a class="reference external" href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/">(OpenCL 1.2 Reference pages)</a></p>
+<p>PEZY-SCx series has the following features:</p>
+<ul class="simple">
+<li>Many-core processor (1024 / 2048 PEs) [<a class="reference internal" href="../3_pezy_scx/spec_sheet.html"><em>Spec Sheet</em></a>]</li>
+<li>World&#8217;s best class energy efficiency (1st place of <a class="reference external" href="https://www.top500.org/green500/">Green 500</a>, Nov. 2018)</li>
+<li>Fast scratchpad memory on PE (local memory) [<a class="reference internal" href="../3_pezy_scx/sc2_spec.html"><em>Detail</em></a>]</li>
+<li>8-way hardware multi-threading (Fine-Grain Multi-threading) [<a class="reference internal" href="../3_pezy_scx/sc2_spec.html"><em>Detail</em></a>]</li>
+<li>MIMD (Multiple Instruction Stream Multiple Data Stream)</li>
+</ul>
+<p>PEZY-SCx series is MIMD (multiple instruction, multiple data)-type processor.
+Each PE (Processing Element) has eight registers and eight program counters for running eight threads independently.</p>
+<p>PEZY-SCx series processor is a three-layer hierarchical structure called &#8220;Prefecture,&#8221;&#8217; &#8220;City,&#8221; and &#8220;Village&#8221; (they are PE groups).
+Each Village has 4 PEs, each City has 4 Villages, and each Prefecture has 16 Cities. PEZY-SC / SC2 has 4 / 8 Prefectures.</p>
+</div>
+<div class="section" id="features-of-pezy-sc">
+<h1>Features of PEZY-SC<a class="headerlink" href="#features-of-pezy-sc" title="Permalink to this headline">¶</a></h1>
+<p>Feature of PEZY-SC (2014~) is:</p>
+<ul class="simple">
+<li>28 nm process</li>
+<li>1024 PE, 733 MHz</li>
+<li>16 MB (16KB/PE) scratchpad memory</li>
+<li>1.5 TFLOPS (DP) / 3.0 TFLOPS (SP, dual issue)</li>
+</ul>
+<p>For more details, refer to the following page.
+<a class="reference internal" href="../3_pezy_scx/sc_spec.html"><em>[Detail]</em></a></p>
+</div>
+<div class="section" id="features-of-pezy-sc2">
+<h1>Features of PEZY-SC2<a class="headerlink" href="#features-of-pezy-sc2" title="Permalink to this headline">¶</a></h1>
+<p>Feature of PEZY-SC2 (2017~) is:</p>
+<ul class="simple">
+<li>16 nm process</li>
+<li>2048 PE, 1GHz</li>
+<li>40 MB (20KB/PE) scratchpad memory</li>
+<li>64 bit SIMD</li>
+<li>4.1 TFLOPS (DP) / 8.2 TFLOPS (SP, x2 SIMD) / 16.4 (HP, x4 SIMD)</li>
+</ul>
+<p>For mode details, refer to the following page.
+<a class="reference internal" href="../3_pezy_scx/sc2_spec.html"><em>[Detail]</em></a></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pzcl_overview.html" class="btn btn-neutral float-right" title="Programming model (PZCL)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, PEZY Computing K.K..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Detail of pzcAdd &mdash; Tutorial for PEZY systems  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Tutorial for PEZY systems  documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started" href="index.html"/>
+        <link rel="next" title="Advanced" href="../2_advanced/index.html"/>
+        <link rel="prev" title="Compile and Run" href="intro.html"/>
+    <link href="../_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Tutorial for PEZY systems
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0_intro/index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Compile and Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#configration-of-each-file">Configration of each file</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">The Detail of pzcAdd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-kernel-program">A Kernel Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-host-program">A Host Program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../2_advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_pezy_scx/index.html">PEZY-SCx Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_libraries/index.html">Tools &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_QA/index.html">Q &amp; A</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Tutorial for PEZY systems</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Getting Started</a> &raquo;</li>
+      
+    <li>The Detail of pzcAdd</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-detail-of-pzcadd">
+<h1>The Detail of pzcAdd<a class="headerlink" href="#the-detail-of-pzcadd" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we explain each program by <strong>pzcAdd</strong>.</p>
+<div class="section" id="a-kernel-program">
+<h2>A Kernel Program<a class="headerlink" href="#a-kernel-program" title="Permalink to this headline">¶</a></h2>
+<p>PEZY-SC / SC2 have 1024 / 2048 PE, and each PE launches eight threads.</p>
+<p>Programming on PEZY-SCx series parallelizes the processing by controlling the thread using thread ID and PE ID.</p>
+<p>A kernel program can be written in PZCL C. It is almost same as C (C++ is not supported).</p>
+<p>In PZCL C, you can use mathematical functions, atomic operations, built-in data types, etc. defined in <code class="docutils literal"><span class="pre">pzc_builtin.h</span></code>.</p>
+<p>The following code is <strong>0_Intro/pzcAdd/pzc/kernel.pzc</strong>. It runs on PEZY-SCx series processor.</p>
+<p>And, <a class="reference internal" href="#pzcadd-flow"><span>fig2</span></a> shows parallelization method of this code.</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span class="cm">/*!</span>
+<span class="cm"> * @author    PEZY Computing, K.K.</span>
+<span class="cm"> * @date      2019</span>
+<span class="cm"> * @copyright BSD-3-Clause</span>
+<span class="cm"> */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;pzc_builtin.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">pzc_add</span><span class="p">(</span><span class="kt">size_t</span>        <span class="n">num</span><span class="p">,</span>
+             <span class="kt">double</span><span class="o">*</span>       <span class="n">dst</span><span class="p">,</span>
+             <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">src0</span><span class="p">,</span>
+             <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">src1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">size_t</span>       <span class="n">pid</span>              <span class="o">=</span> <span class="n">get_pid</span><span class="p">();</span>
+    <span class="kt">size_t</span>       <span class="n">tid</span>              <span class="o">=</span> <span class="n">get_tid</span><span class="p">();</span>
+    <span class="kt">size_t</span>       <span class="n">gid</span>              <span class="o">=</span> <span class="n">pid</span> <span class="o">*</span> <span class="n">get_maxtid</span><span class="p">()</span> <span class="o">+</span> <span class="n">tid</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">GLOBAL_WORK_SIZE</span> <span class="o">=</span> <span class="n">get_maxtid</span><span class="p">()</span> <span class="o">*</span> <span class="n">get_maxpid</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gid</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="n">GLOBAL_WORK_SIZE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">s0</span> <span class="o">=</span> <span class="n">src0</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="kt">double</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">src1</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">chgthread</span><span class="p">();</span>
+        <span class="n">dst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s0</span> <span class="o">+</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">flush</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This code executes in the following procedure:</p>
+<ol class="arabic simple">
+<li>In L.9, Define the <code class="docutils literal"><span class="pre">pzc_add</span></code> function. Only functions with the <code class="docutils literal"><span class="pre">pzc_</span></code> prefix can be called from the host program.</li>
+<li>In L.14-15, it gets its own thread ID (<strong>tid</strong>) and PE ID (<strong>pid</strong>) using <code class="docutils literal"><span class="pre">get_tid()</span></code> and <code class="docutils literal"><span class="pre">get_pid()</span></code> (e.g., on PEZY-SC2, <strong>tid</strong> is 0-7, <strong>pid</strong> is 0-2047).</li>
+<li>In L.16, Then, computes its own global thread ID (<strong>gid</strong>) by using tid and pid. (For example, gid of threads in PE 0  are 0-7, and gid of threads in PE 1 are 8-15.)</li>
+<li>In L.17, it computes maximum number of threads as <strong>GLOBAL_WORK_SIZE</strong> using <code class="docutils literal"><span class="pre">get_maxtid()</span></code> and <code class="docutils literal"><span class="pre">get_maxpid()</span></code>. The maximum number of threads is defined in the host code.</li>
+<li>In L.19-24, it computes <strong>dst[gid] = src0[gid] + src1[gid]</strong>. <code class="docutils literal"><span class="pre">chgthread()</span></code> is switching <strong>Front thread</strong> and <strong>Back threads</strong> for hide some of the latency (for more detail: [<a class="reference internal" href="../3_pezy_scx/thread.html"><em>PEZYSCx thread control</em></a>]).</li>
+<li>Finally (L.26), flushing the cache memory for storing data to memory using <code class="docutils literal"><span class="pre">flush()</span></code> (for more detail: [<a class="reference internal" href="../3_pezy_scx/cache.html"><em>PEZYSCx Cache Coherency</em></a>]).</li>
+</ol>
+<div class="figure" id="id1">
+<span id="pzcadd-flow"></span><img alt="../_images/pzcAdd.png" src="../_images/pzcAdd.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">parallelization vector additon on PEZY-SC2.</span></p>
+</div>
+</div>
+<div class="section" id="a-host-program">
+<h2>A Host Program<a class="headerlink" href="#a-host-program" title="Permalink to this headline">¶</a></h2>
+<p>Programming of PEZY-SCx series is a host-device model.
+PEZY-SCx receives data from the CPU, calculation, and returns the result to the CPU.</p>
+<p>A host program runs on the host CPU. A host program is written in C/C++.
+The PZCL API allocates the PEZY-SCx memory, transfers data between the CPU and PEZY-SCx, launches the kernel program, and so forth.</p>
+<p>PZCL API&#8217;s are almost the same as OpenCL 1.2. So please see <a class="reference external" href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/">(OpenCL 1.2 Reference pages)</a>.</p>
+<p>In this page, we will explain the five parts that the user will frequently changes in this program.</p>
+<p>The core function of <code class="docutils literal"><span class="pre">main.cpp</span></code> is <code class="docutils literal"><span class="pre">void</span> <span class="pre">pzcAdd()</span></code>. We show <code class="docutils literal"><span class="pre">pzcAdd()</span></code> as following code:</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">pzcAdd</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">num</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span> <span class="n">src0</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span> <span class="n">src1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">try</span> <span class="p">{</span>
+        <span class="c1">// Get Platform</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cl</span><span class="o">::</span><span class="n">Platform</span><span class="o">&gt;</span> <span class="n">platforms</span><span class="p">;</span>
+        <span class="n">cl</span><span class="o">::</span><span class="n">Platform</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">platforms</span><span class="p">);</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">Platform</span> <span class="o">=</span> <span class="n">platforms</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+        <span class="c1">// Get devices</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cl</span><span class="o">::</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">devices</span><span class="p">;</span>
+        <span class="n">Platform</span><span class="p">.</span><span class="n">getDevices</span><span class="p">(</span><span class="n">CL_DEVICE_TYPE_DEFAULT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">devices</span><span class="p">);</span>
+
+        <span class="c1">// Use first device.</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">device</span> <span class="o">=</span> <span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+        <span class="c1">// Create Context.</span>
+        <span class="k">auto</span> <span class="n">context</span> <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">Context</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+
+        <span class="c1">// Create CommandQueue.</span>
+        <span class="k">auto</span> <span class="n">command_queue</span> <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">CommandQueue</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="c1">// Create Program.</span>
+        <span class="c1">// Load compiled binary file and create cl::Program object.</span>
+        <span class="k">auto</span> <span class="n">program</span> <span class="o">=</span> <span class="n">createProgram</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="s">&quot;kernel/kernel.pz&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Create Kernel.</span>
+        <span class="c1">// Give kernel name without pzc_ prefix.</span>
+        <span class="k">auto</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">Kernel</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="s">&quot;add&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Create Buffers.</span>
+        <span class="k">auto</span> <span class="n">device_src0</span> <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">Buffer</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CL_MEM_READ_WRITE</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">device_src1</span> <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">Buffer</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CL_MEM_READ_WRITE</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">device_dst</span>  <span class="o">=</span> <span class="n">cl</span><span class="o">::</span><span class="n">Buffer</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CL_MEM_READ_WRITE</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">);</span>
+
+        <span class="c1">// Send src.</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">enqueueWriteBuffer</span><span class="p">(</span><span class="n">device_src0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">src0</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">enqueueWriteBuffer</span><span class="p">(</span><span class="n">device_src1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">src1</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+        <span class="c1">// Clear dst.</span>
+        <span class="n">cl</span><span class="o">::</span><span class="n">Event</span> <span class="n">write_event</span><span class="p">;</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">enqueueFillBuffer</span><span class="p">(</span><span class="n">device_dst</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">,</span> <span class="n">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">write_event</span><span class="p">);</span>
+        <span class="n">write_event</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+
+        <span class="c1">// Set kernel args.</span>
+        <span class="n">kernel</span><span class="p">.</span><span class="n">setArg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+        <span class="n">kernel</span><span class="p">.</span><span class="n">setArg</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">device_dst</span><span class="p">);</span>
+        <span class="n">kernel</span><span class="p">.</span><span class="n">setArg</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">device_src0</span><span class="p">);</span>
+        <span class="n">kernel</span><span class="p">.</span><span class="n">setArg</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">device_src1</span><span class="p">);</span>
+
+        <span class="c1">// Get workitem size.</span>
+        <span class="c1">// sc1-64: 8192  (1024 PEs * 8 threads)</span>
+        <span class="c1">// sc2   : 15782 (1984 PEs * 8 threads)</span>
+        <span class="kt">size_t</span> <span class="n">global_work_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">device_name</span><span class="p">;</span>
+            <span class="n">device</span><span class="p">.</span><span class="n">getInfo</span><span class="p">(</span><span class="n">CL_DEVICE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">device_name</span><span class="p">);</span>
+
+            <span class="kt">size_t</span> <span class="n">global_work_size_</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+            <span class="n">device</span><span class="p">.</span><span class="n">getInfo</span><span class="p">(</span><span class="n">CL_DEVICE_MAX_WORK_ITEM_SIZES</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">global_work_size_</span><span class="p">);</span>
+
+            <span class="n">global_work_size</span> <span class="o">=</span> <span class="n">global_work_size_</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">device_name</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;PEZY-SC2&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">global_work_size</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">global_work_size</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="mi">15872</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Use device : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">device_name</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;workitem   : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">global_work_size</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Run device kernel.</span>
+        <span class="n">cl</span><span class="o">::</span><span class="n">Event</span> <span class="n">event</span><span class="p">;</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">enqueueNDRangeKernel</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">cl</span><span class="o">::</span><span class="n">NullRange</span><span class="p">,</span> <span class="n">cl</span><span class="o">::</span><span class="n">NDRange</span><span class="p">(</span><span class="n">global_work_size</span><span class="p">),</span> <span class="n">cl</span><span class="o">::</span><span class="n">NullRange</span><span class="p">,</span> <span class="n">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+
+        <span class="c1">// Waiting device completion.</span>
+        <span class="n">event</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+
+        <span class="c1">// Get dst.</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">enqueueReadBuffer</span><span class="p">(</span><span class="n">device_dst</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dst</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+        <span class="c1">// Finish all commands.</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">flush</span><span class="p">();</span>
+        <span class="n">command_queue</span><span class="p">.</span><span class="n">finish</span><span class="p">();</span>
+
+    <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">cl</span><span class="o">::</span><span class="n">Error</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">msg</span><span class="p">;</span>
+        <span class="n">msg</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;CL Error : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">err</span><span class="p">();</span>
+        <span class="n">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">str</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This code executes processing in the following procedure:</p>
+<ol class="arabic simple">
+<li>In L.101, setting the function name, that written in kernel program, without <strong>pzc_</strong> prefix to execute</li>
+<li>In L.104-105, it allocate the memory on PEZY-SCx as <code class="docutils literal"><span class="pre">cl::Buffer</span></code> type for array <strong>src0</strong>, <strong>src1</strong>, and <strong>dst</strong>.</li>
+<li>In L.109-110, it send the data of <strong>src0</strong> and <strong>src1</strong> to PEZY-SCx (This sample is blocking communication).</li>
+<li>In L.114, Initializing array <strong>dst</strong> as zero.</li>
+<li>In L.118-121, setting arguments of <code class="docutils literal"><span class="pre">void</span> <span class="pre">pzc_add(size_t</span> <span class="pre">num,</span> <span class="pre">double*</span> <span class="pre">dst,</span> <span class="pre">const</span> <span class="pre">double*</span> <span class="pre">src0,</span> <span class="pre">const</span> <span class="pre">double*</span> <span class="pre">src1)</span></code> in kernel program.</li>
+<li>In L.125-141, setting the number of threads to be launched. It must be a multiple of 128 (City).</li>
+<li>In L.145, calling the <code class="docutils literal"><span class="pre">pzc_Add()</span></code> function. It is non-blocking execution.</li>
+<li>In L.148, waiting for end of <code class="docutils literal"><span class="pre">pzc_Add()</span></code> on PEZY-SCx.</li>
+<li>In L.151, receiving result data from PEZY-SCx.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../2_advanced/index.html" class="btn btn-neutral float-right" title="Advanced" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral" title="Compile and Run" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, PEZY Computing K.K..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

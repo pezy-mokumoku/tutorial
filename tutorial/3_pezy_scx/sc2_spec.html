@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PEZY-SC2 Specification &mdash; Tutorial for PEZY systems  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Tutorial for PEZY systems  documentation" href="../index.html"/>
+        <link rel="up" title="PEZY-SCx Specification" href="index.html"/>
+        <link rel="next" title="Cache Coherency" href="cache.html"/>
+        <link rel="prev" title="PEZY-SC Specification" href="sc_spec.html"/>
+    <link href="../_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Tutorial for PEZY systems
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0_intro/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_start/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_advanced/index.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">PEZY-SCx Specification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="spec_sheet.html">PEZY-SCx series Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sc_spec.html">PEZY-SC Specification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">PEZY-SC2 Specification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cache-memory">Cache memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atomic-operations">Atomic operations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">Cache Coherency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread.html">Thread control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="localmem.html">Local memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../4_libraries/index.html">Tools &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_QA/index.html">Q &amp; A</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Tutorial for PEZY systems</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">PEZY-SCx Specification</a> &raquo;</li>
+      
+    <li>PEZY-SC2 Specification</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pezy-sc2-specification">
+<h1>PEZY-SC2 Specification<a class="headerlink" href="#pezy-sc2-specification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="sc_spec.html#sc-overview"><span>Fig. 3</span></a> shows block diagram of PEZY-SC2.</p>
+<div class="figure" id="id1">
+<span id="sc2-overview"></span><img alt="../_images/PEZY-SC2_block_diagram.png" src="../_images/PEZY-SC2_block_diagram.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">PEZY-SC2 Block Diagram.</span></p>
+</div>
+<p><strong>Remarks:</strong></p>
+<ul class="simple">
+<li>One special function unit (SFU) is installed in each City to calculate division, modulo, square root, and inverse of the square root.</li>
+<li>PEZY-SC2 can use the MAD (Multiply-Add; <em>d = a + b * c</em>) instruction; MAD is addition and multiplication. Unlike the FMA (Fused-Multiply-Add) instruction, the MAD rounds the result of the multiplication. PE performs the MAD by running the adder and multiplier at the same time.</li>
+<li>PEZY-SC2 processor supports 64-bit SIMD instructions. It can compute one double-precision operation, two single-precision operations, or four half-precision operations simultaneously.</li>
+<li>Each PE has 2 KB L1 data cache, and each City has 64 KB L2 data cache. Each Prefecture has 5 MB LLC (Last Level Cache), and the LCCs of each Prefecture are connected by an X-bar.</li>
+<li>L1 Data Cache and L2 Data Cache <strong>DO NOT</strong> take hardware coherency (<a class="reference internal" href="cache.html"><em>for more detail</em></a>).</li>
+<li><a class="reference internal" href="#table-synclevel"><span>Table2</span></a> shows the synchronization levels of PEZY-SC2.</li>
+</ul>
+<table border="1" class="docutils" id="id2">
+<span id="table-synclevel"></span><caption><span class="caption-number">Table 2 </span><span class="caption-text">PEZY-SC2 Synchronization levels</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="21%" />
+<col width="17%" />
+<col width="8%" />
+<col width="19%" />
+<col width="5%" />
+<col width="7%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Synchronization level</th>
+<th class="head">Processor structure</th>
+<th class="head">City</th>
+<th class="head">PE</th>
+<th class="head">Thread</th>
+<th class="head">Cache</th>
+<th class="head">Kernel functions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Level 5: Processor level</td>
+<td>8 Prefectures / State</td>
+<td>128 Cities</td>
+<td>2048 PEs</td>
+<td>16384</td>
+<td>L1/L2/LLC</td>
+<td><code class="docutils literal"><span class="pre">sync()</span></code>, <code class="docutils literal"><span class="pre">flush()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Level 4: Prefecture level</td>
+<td>16 Cities / Prefecture</td>
+<td>16 Cities</td>
+<td>256 PEs</td>
+<td>2048</td>
+<td>L1/L2/LLC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Level 3: City level</td>
+<td>4 Villages / City</td>
+<td>1 City</td>
+<td>16 PEs</td>
+<td>128</td>
+<td>L1/L2</td>
+<td><code class="docutils literal"><span class="pre">sync_L2()</span></code>, <code class="docutils literal"><span class="pre">flush_L2()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Level 2: Village level</td>
+<td>4 PEs / Village</td>
+<td>&nbsp;</td>
+<td>4 PEs</td>
+<td>32</td>
+<td>L1</td>
+<td><code class="docutils literal"><span class="pre">sync_L1()</span></code>, <code class="docutils literal"><span class="pre">flush_L1()</span></code></td>
+</tr>
+<tr class="row-even"><td>Level 1: PE level</td>
+<td>8 Threads / PE</td>
+<td>&nbsp;</td>
+<td>1 PE 8 Threads</td>
+<td>8</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Level 0: Thread group level</td>
+<td>4 Threads / PE</td>
+<td>&nbsp;</td>
+<td>1 PE 4 Threads [0-3|4-7]</td>
+<td>4</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cache-memory">
+<h2>Cache memory<a class="headerlink" href="#cache-memory" title="Permalink to this headline">¶</a></h2>
+<p>The PEZY-SC2 processor has three-layer hierarchical structure cache; L1 Dcache, L2 Dcache, L1 Icache, L2 Icache, and LLC.</p>
+<p><a class="reference internal" href="#table-cache"><span>Table3</span></a> shows cache memory configratiion of PEZY-SC2.</p>
+<table border="1" class="docutils" id="id3">
+<span id="table-cache"></span><caption><span class="caption-number">Table 3 </span><span class="caption-text">PEZY-SC2 Cache Memory Configration</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="10%" />
+<col width="15%" />
+<col width="10%" />
+<col width="11%" />
+<col width="15%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">L1 DCahe</th>
+<th class="head">L2 DCache</th>
+<th class="head">L1 ICache</th>
+<th class="head">L2 ICache</th>
+<th class="head">LastLevelCache(LLC)</th>
+<th class="head">Atomic Cache</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Size
+(Chip Total)</td>
+<td>2k byte
+(4M byte)</td>
+<td>64k byte
+(8M byte)</td>
+<td>4k byte
+(8M byte)</td>
+<td>32k byte
+(4M byte)</td>
+<td>512 + 128K byte
+(32 + 8M byte)</td>
+<td>1k byte
+(16k byte)</td>
+</tr>
+<tr class="row-odd"><td>WAY</td>
+<td>8</td>
+<td>16</td>
+<td>8</td>
+<td>4</td>
+<td>16 + 4</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>Line size</td>
+<td>64 byte</td>
+<td>256 byte</td>
+<td>128 byte</td>
+<td>256 byte</td>
+<td>1024 byte</td>
+<td>256 byte</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="atomic-operations">
+<h2>Atomic operations<a class="headerlink" href="#atomic-operations" title="Permalink to this headline">¶</a></h2>
+<p>PEZY-SC2 supports atomic operations.</p>
+<p>Atomic cache <strong>DO NOT</strong> take hardware coherency. In order to read / write data in atomic cache to / from global memory, it is necessary to synchronize at the software layer with functions such as <code class="docutils literal"><span class="pre">pz_atomic_flush()</span></code>.</p>
+<p>It is almost same as atomic functions of OpenCL 1.2:
+<a class="reference external" href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/atomicFunctions.html">Atomic Functions in OpenCL 1.2</a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cache.html" class="btn btn-neutral float-right" title="Cache Coherency" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sc_spec.html" class="btn btn-neutral" title="PEZY-SC Specification" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, PEZY Computing K.K..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compile and Run &mdash; Tutorial for PEZY systems  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Tutorial for PEZY systems  documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started" href="index.html"/>
+        <link rel="next" title="The Detail of pzcAdd" href="detail.html"/>
+        <link rel="prev" title="Getting Started" href="index.html"/>
+    <link href="../_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Tutorial for PEZY systems
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0_intro/index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Compile and Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configration-of-each-file">Configration of each file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="detail.html">The Detail of pzcAdd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../2_advanced/index.html">Advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_pezy_scx/index.html">PEZY-SCx Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_libraries/index.html">Tools &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_QA/index.html">Q &amp; A</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Tutorial for PEZY systems</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Getting Started</a> &raquo;</li>
+      
+    <li>Compile and Run</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compile-and-run">
+<h1>Compile and Run<a class="headerlink" href="#compile-and-run" title="Permalink to this headline">¶</a></h1>
+<p><strong>sample/0_Intro/pzcAdd</strong> is a simple sample code of PEZY-SCx series. It computes vector addition: <em>dst</em> = <em>src0</em> + <em>src1</em></p>
+<p>When your system has PEZY-SC2, compiling and executing program is very easy. Enter this:</p>
+<div class="highlight-none"><div class="highlight"><pre>&gt; make
+&gt; ./pzcAdd
+num 1024
+Use device : PEZY-SC2
+workitem   : 15872
+PASS
+</pre></div>
+</div>
+<p>For environments where you need to use slurm, please see system tutorials.</p>
+<p>When your system has PEZY-SC, you have to rewrite Makefile&#8217;s PZC_TARGET_ARCH to <code class="docutils literal"><span class="pre">sc-64</span></code>.</p>
+<div class="highlight-none"><div class="highlight"><pre>&gt; PZC_TARGET_ARCH=sc1-64 make
+or
+&gt; export PZC_TARGET_ARCH=sc1-64; make
+
+&gt; ./pzcAdd
+num 1024
+Use device : PEZY-SC
+workitem   : 8192
+PASS
+</pre></div>
+</div>
+<p>In the result,
+<strong>num</strong> is array size, <strong>workitem</strong> is a number of threads launched.</p>
+<p>To change <strong>num</strong>, using first arguments of program:</p>
+<div class="highlight-none"><div class="highlight"><pre>&gt; make
+&gt; ./pzcAdd 102400
+num 10240
+Use device : PEZY-SC2
+workitem   : 15872
+PASS
+</pre></div>
+</div>
+<p>Now PEZY-SCx computed the addition of the array.</p>
+</div>
+<div class="section" id="configration-of-each-file">
+<h1>Configration of each file<a class="headerlink" href="#configration-of-each-file" title="Permalink to this headline">¶</a></h1>
+<p>The PEZY-SCx series processor supports PZCL, an OpenCL-like programming interface. To run a program on the PEZY-SC series processor, it needs two types of program: a kernel program and a host program.</p>
+<p>A host program runs on the host CPU. A host program is written in C/C++, and the PZCL API compiles it by using an ordinary C compiler (e.g., GNU C compiler).
+A kernel program runs on the PEZY-SC2 device. It is written in &#8220;PZCL C&#8221; and compiled with LLVM, which is almost the same as OpenCL C.</p>
+<p>The sample has the following files:</p>
+<div class="highlight-none"><div class="highlight"><pre>.
+├──kernel
+│   └── Makefile # Makefile for kernel program
+├── main.cpp # host program
+├── Makefile # Makefile for host program
+└── pzc
+    └── kernel.pzc # kernel program
+</pre></div>
+</div>
+<p><strong>main.cpp</strong> is a host program. It is compiled by using <strong>./Makefile</strong>.
+<strong>pzc/kernel.pzc</strong> is a kernel program. It is compiled by using <strong>kernel/Makefile</strong></p>
+<p>After <strong>make</strong> and <strong>./pzcAdd</strong>, the sample has the following directory structure:</p>
+<div class="highlight-none"><div class="highlight"><pre>.
+├── Makefile
+├── kernel
+│   ├── Makefile
+│   ├── kernel.pz # kernel obj.
+│   └── obj
+│       ├── kernel.d
+│       ├── kernel.hex
+│       ├── kernel.ir
+│       ├── kernel.iro
+│       ├── kernel.ll
+│       ├── kernel.o
+│       ├── kernel.pzs
+│       └── kernel.sym
+├── main.cpp
+├── obj
+│   ├── main.d
+│   └── main.o
+├── pzc
+│   └── kernel.pzc
+├── pzcAdd # host obj.
+└── pzcl.log # log file of pzcAdd
+</pre></div>
+</div>
+<p>Compiling of kernel program generates files, <strong>./kernel/**</strong>.
+Compiling host program generates files, <strong>./obj/**</strong> and <strong>pzcAdd</strong>
+When you execute pzcAdd, It generates <strong>pzcl.log</strong> as log.</p>
+<p>This sample is an example of offline compilation.
+When pzcAdd is executed, <strong>kernel.pz</strong> is called at the time of execution.</p>
+<p>We will explain the details of this sample from the next chapter.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="detail.html" class="btn btn-neutral float-right" title="The Detail of pzcAdd" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Getting Started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, PEZY Computing K.K..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

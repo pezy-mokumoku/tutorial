@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PEZY-SCx series Specification &mdash; Tutorial for PEZY systems  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Tutorial for PEZY systems  documentation" href="../index.html"/>
+        <link rel="up" title="PEZY-SCx Specification" href="index.html"/>
+        <link rel="next" title="PEZY-SC Specification" href="sc_spec.html"/>
+        <link rel="prev" title="PEZY-SCx Specification" href="index.html"/>
+    <link href="../_static/css/main.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Tutorial for PEZY systems
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0_intro/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_start/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_advanced/index.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">PEZY-SCx Specification</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">PEZY-SCx series Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sc_spec.html">PEZY-SC Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sc2_spec.html">PEZY-SC2 Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">Cache Coherency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread.html">Thread control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="localmem.html">Local memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../4_libraries/index.html">Tools &amp; Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_QA/index.html">Q &amp; A</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Tutorial for PEZY systems</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">PEZY-SCx Specification</a> &raquo;</li>
+      
+    <li>PEZY-SCx series Specification</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pezy-scx-series-specification">
+<h1>PEZY-SCx series Specification<a class="headerlink" href="#pezy-scx-series-specification" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="#spec-sheet"><span>Table1</span></a> shows specification of PEZY-SCx series processor.</p>
+<table border="1" class="docutils" id="id1">
+<span id="spec-sheet"></span><caption><span class="caption-number">Table 1 </span><span class="caption-text">PEZY-SCx series Specification</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="44%" />
+<col width="28%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">PEZY-SC</th>
+<th class="head">PEZY-SC2</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Process</td>
+<td>28 nm</td>
+<td>16 nm</td>
+</tr>
+<tr class="row-odd"><td>The number of PEs</td>
+<td>1024</td>
+<td>2048</td>
+</tr>
+<tr class="row-even"><td>Clock Freq.</td>
+<td>733 MHz</td>
+<td>1 GHz</td>
+</tr>
+<tr class="row-odd"><td>L1 Cache Memory</td>
+<td>1 MB</td>
+<td>4 MB (D), 8 MB (I)</td>
+</tr>
+<tr class="row-even"><td>L2 Cache Memory</td>
+<td>4 MB</td>
+<td>8 MB (D), 4 MB (I)</td>
+</tr>
+<tr class="row-odd"><td>Last Level Cache Memory (LLC)</td>
+<td>8 MB</td>
+<td>40 MB</td>
+</tr>
+<tr class="row-even"><td>Scratchpad Memory (local memory)</td>
+<td>16 MB (16KB/PE)</td>
+<td>40 MB (20KB/PE)</td>
+</tr>
+<tr class="row-odd"><td>PCIe Interface</td>
+<td>Gen3 8 Lane 4 Port</td>
+<td>Gen4 8 Lane 4 Port</td>
+</tr>
+<tr class="row-even"><td>DDR Interface</td>
+<td>DDR4 64 bit 8 ch.</td>
+<td>DDR4 64 bit 4 ch.</td>
+</tr>
+<tr class="row-odd"><td>SIMD vector length</td>
+<td>N/A (scalar)</td>
+<td>64 bit</td>
+</tr>
+<tr class="row-even"><td>Peak (DP, TFLOPS)</td>
+<td>1.5</td>
+<td>4.1</td>
+</tr>
+<tr class="row-odd"><td>Peak (SP, TFLOPS)</td>
+<td>3.0 (dual issue)</td>
+<td>8.2 (x2 SIMD)</td>
+</tr>
+<tr class="row-even"><td>Peak (HP, TFLOPS)</td>
+<td>N/A</td>
+<td>16.4 (x4 SIMD)</td>
+</tr>
+<tr class="row-odd"><td>Power Consumption (Peak)</td>
+<td>70 W</td>
+<td>200 W</td>
+</tr>
+</tbody>
+</table>
+<p>(*) Clock Freq., global memory size, # of PE, and etc. depend on the system configuration.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sc_spec.html" class="btn btn-neutral float-right" title="PEZY-SC Specification" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="PEZY-SCx Specification" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, PEZY Computing K.K..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
